@@ -1,0 +1,10 @@
+{
+  "name": "@lafourmiliere-benevolat/renovate-config",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "renovate-config-validator"
+  },
+  "dependencies": {
+    "renovate": "^37.222.0"
+  }
+}
