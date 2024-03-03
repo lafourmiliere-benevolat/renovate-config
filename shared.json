@@ -8,5 +8,12 @@
   "labels": [
     "dependencies",
     "renovate"
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["terraform"],
+      "matchDepTypes": ["required_version"],
+      "enabled": false
+    }
   ]
 }
