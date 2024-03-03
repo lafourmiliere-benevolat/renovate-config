@@ -15,5 +15,8 @@
       "matchDepTypes": ["required_version"],
       "enabled": false
     }
-  ]
+  ],
+  "pre-commit": {
+    "enabled": true
+  }
 }
