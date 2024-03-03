@@ -4,6 +4,7 @@
     "config:recommended",
     "group:allNonMajor"
   ],
+  "timezone": "Europe/Paris",
   "labels": [
     "dependencies",
     "renovate"
