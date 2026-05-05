@@ -23,12 +23,6 @@
       "enabled": false
     },
     {
-      "description": "3rd-party Rails ecosystem gems major-coupled to Rails. The 'Ruby on Rails packages' name matches group:rubyOnRails (auto-applied via config:best-practices) so these land in the same PR as the official rails/* gems.",
-      "groupName": "Ruby on Rails packages",
-      "matchManagers": ["bundler"],
-      "matchPackageNames": ["sprockets-rails", "turbo-rails", "stimulus-rails", "rails-i18n"]
-    },
-    {
       "groupName": "hashicorp terraform providers",
       "matchDatasources": ["terraform-provider"],
       "matchPackageNames": ["/^hashicorp//"]
