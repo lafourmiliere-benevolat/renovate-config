@@ -1,28 +1,60 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended",
+    "config:best-practices",
     "group:allNonMajor",
-    ":semanticCommitTypeAll(chore)"
+    ":semanticCommitTypeAll(chore)",
+    ":enableVulnerabilityAlertsWithLabel(security)"
   ],
   "timezone": "Europe/Paris",
   "labels": [
     "dependencies",
     "renovate"
   ],
-  "packageRules": [
-    {
-      "matchManagers": ["terraform"],
-      "matchDepTypes": ["required_version"],
-      "enabled": false
-    }
-  ],
   "pre-commit": {
     "enabled": true
   },
-  "lockFileMaintenance": {
-    "enabled": true
-  },
   "rebaseWhen": "conflicted",
-  "rangeStrategy": "update-lockfile"
+  "packageRules": [
+    {
+      "description": "OpenTofu/Terraform version is governed by .tool-versions; do not bump required_version blocks independently.",
+      "matchManagers": ["terraform"],
+      "matchDepTypes": ["required_version"],
+      "enabled": false
+    },
+    {
+      "groupName": "hashicorp terraform providers",
+      "matchDatasources": ["terraform-provider"],
+      "matchPackageNames": ["/^hashicorp//"]
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "prek (no asdf plugin upstream)",
+      "managerFilePatterns": ["/(^|/)\\.tool-versions$/"],
+      "matchStrings": ["prek (?<currentValue>\\S+)"],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "j178/prek",
+      "extractVersionTemplate": "^v?(?<version>.+)$"
+    },
+    {
+      "customType": "regex",
+      "description": "vite-plus (no asdf plugin upstream)",
+      "managerFilePatterns": ["/(^|/)\\.tool-versions$/"],
+      "matchStrings": ["vp (?<currentValue>\\S+)"],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "voidzero-dev/vite-plus",
+      "extractVersionTemplate": "^v?(?<version>.+)$"
+    },
+    {
+      "customType": "regex",
+      "description": "git-cliff (no asdf plugin upstream)",
+      "managerFilePatterns": ["/(^|/)\\.tool-versions$/"],
+      "matchStrings": ["git-cliff (?<currentValue>\\S+)"],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "orhun/git-cliff",
+      "extractVersionTemplate": "^v?(?<version>.+)$"
+    }
+  ]
 }
