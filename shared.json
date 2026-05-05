@@ -1,28 +1,26 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended",
+    "config:best-practices",
     "group:allNonMajor",
-    ":semanticCommitTypeAll(chore)"
+    ":semanticCommitTypeAll(chore)",
+    ":enableVulnerabilityAlertsWithLabel(security)"
   ],
   "timezone": "Europe/Paris",
   "labels": [
     "dependencies",
     "renovate"
   ],
+  "pre-commit": {
+    "enabled": true
+  },
+  "rebaseWhen": "conflicted",
   "packageRules": [
     {
+      "description": "Tool version (e.g. OpenTofu/Terraform) is governed by .tool-versions or asdf — do not bump the required_version block independently.",
       "matchManagers": ["terraform"],
       "matchDepTypes": ["required_version"],
       "enabled": false
     }
-  ],
-  "pre-commit": {
-    "enabled": true
-  },
-  "lockFileMaintenance": {
-    "enabled": true
-  },
-  "rebaseWhen": "conflicted",
-  "rangeStrategy": "update-lockfile"
+  ]
 }
