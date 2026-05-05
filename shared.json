@@ -21,6 +21,165 @@
       "matchManagers": ["terraform"],
       "matchDepTypes": ["required_version"],
       "enabled": false
+    },
+    {
+      "description": "Workspace-internal packages are managed by Bun/Yarn workspaces, not Renovate.",
+      "matchPackageNames": ["/^@lafourmiliere-benevolat//"],
+      "enabled": false
+    },
+    {
+      "description": "Group the Rails monolith — these gems must move in lockstep.",
+      "groupName": "rails-monolith",
+      "matchManagers": ["bundler"],
+      "matchPackageNames": [
+        "rails",
+        "railties",
+        "actioncable",
+        "actionmailbox",
+        "actionmailer",
+        "actionpack",
+        "actiontext",
+        "actionview",
+        "activejob",
+        "activemodel",
+        "activerecord",
+        "activestorage",
+        "activesupport",
+        "sprockets-rails",
+        "turbo-rails",
+        "stimulus-rails",
+        "rails-i18n"
+      ]
+    },
+    {
+      "description": "Group the rspec gems together.",
+      "groupName": "rspec",
+      "matchManagers": ["bundler"],
+      "matchPackageNames": ["/^rspec(-|$)/"]
+    },
+    {
+      "description": "Sentry SDKs must move together.",
+      "groupName": "sentry",
+      "matchManagers": ["bundler"],
+      "matchPackageNames": ["sentry-ruby", "sentry-rails"]
+    },
+    {
+      "description": "Capistrano plugins.",
+      "groupName": "capistrano",
+      "matchManagers": ["bundler"],
+      "matchPackageNames": ["/^capistrano(-|$)/"]
+    },
+    {
+      "description": "AWS SDK gems.",
+      "groupName": "aws-sdk",
+      "matchManagers": ["bundler"],
+      "matchPackageNames": ["/^aws-sdk-/"]
+    },
+    {
+      "description": "React stack — keep in sync.",
+      "groupName": "react",
+      "matchManagers": ["npm"],
+      "matchPackageNames": [
+        "react",
+        "react-dom",
+        "react-is",
+        "react-refresh",
+        "@types/react",
+        "@types/react-dom"
+      ]
+    },
+    {
+      "description": "Disable known-unmaintained legacy libs intentionally pinned at known-good versions.",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["aos", "summernote", "bootstrap-daterangepicker", "gmaps"],
+      "enabled": false
+    },
+    {
+      "description": "Group all Hashicorp Terraform providers — they version in lockstep often.",
+      "groupName": "hashicorp terraform providers",
+      "matchDatasources": ["terraform-provider"],
+      "matchPackageNames": ["/^hashicorp//"]
+    },
+    {
+      "description": "Goss bumps invalidate goss_sha256sum — require human review on the dependency dashboard.",
+      "matchPackageNames": ["goss-org/goss"],
+      "dependencyDashboardApproval": true
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Track prek version in .tool-versions (no asdf plugin upstream)",
+      "managerFilePatterns": ["/(^|/)\\.tool-versions$/"],
+      "matchStrings": ["prek (?<currentValue>\\S+)"],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "j178/prek",
+      "extractVersionTemplate": "^v?(?<version>.+)$"
+    },
+    {
+      "customType": "regex",
+      "description": "Track vite-plus (vp) version in .tool-versions (no asdf plugin upstream)",
+      "managerFilePatterns": ["/(^|/)\\.tool-versions$/"],
+      "matchStrings": ["vp (?<currentValue>\\S+)"],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "voidzero-dev/vite-plus",
+      "extractVersionTemplate": "^v?(?<version>.+)$"
+    },
+    {
+      "customType": "regex",
+      "description": "Track git-cliff version in .tool-versions (no asdf plugin upstream)",
+      "managerFilePatterns": ["/(^|/)\\.tool-versions$/"],
+      "matchStrings": ["git-cliff (?<currentValue>\\S+)"],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "orhun/git-cliff",
+      "extractVersionTemplate": "^v?(?<version>.+)$"
+    },
+    {
+      "customType": "regex",
+      "description": "Track Node.js version pinned in Dockerfile ARG NODE_VERSION",
+      "managerFilePatterns": ["/(^|/)Dockerfile$/"],
+      "matchStrings": ["ARG NODE_VERSION=(?<currentValue>\\S+)"],
+      "datasourceTemplate": "node-version",
+      "depNameTemplate": "node"
+    },
+    {
+      "customType": "regex",
+      "description": "Track Bun version pinned in Dockerfile ARG BUN_VERSION",
+      "managerFilePatterns": ["/(^|/)Dockerfile$/"],
+      "matchStrings": ["ARG BUN_VERSION=(?<currentValue>\\S+)"],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "oven-sh/bun",
+      "extractVersionTemplate": "^bun-v?(?<version>.+)$"
+    },
+    {
+      "customType": "regex",
+      "description": "Track yarn classic pin inside Dockerfile RUN line",
+      "managerFilePatterns": ["/(^|/)Dockerfile$/"],
+      "matchStrings": ["npm install -g yarn@(?<currentValue>[0-9.]+)"],
+      "datasourceTemplate": "npm",
+      "depNameTemplate": "yarn"
+    },
+    {
+      "customType": "regex",
+      "description": "Track AWS CLI Docker image pinned in Makefile",
+      "managerFilePatterns": ["/(^|/)Makefile$/"],
+      "matchStrings": ["AWS_CLI_IMAGE\\s*:?=\\s*(?<depName>\\S+):(?<currentValue>\\S+)"],
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Track tflint plugin sources in .tflint.hcl",
+      "managerFilePatterns": ["/(^|/)\\.tflint\\.hcl$/"],
+      "matchStrings": ["version\\s*=\\s*\"(?<currentValue>[^\"]+)\"\\s*\\n\\s*source\\s*=\\s*\"github\\.com/(?<depName>[^\"]+)\""],
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "customType": "regex",
+      "description": "Track goss version in ansible role vars (sha256 must be hand-updated)",
+      "managerFilePatterns": ["/ansible/roles/goss/vars/main\\.yml$/"],
+      "matchStrings": ["goss_version:\\s*(?<currentValue>v[\\d.]+)"],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "goss-org/goss"
     }
   ]
 }
