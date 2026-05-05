@@ -32,12 +32,6 @@
       "groupName": "hashicorp terraform providers",
       "matchDatasources": ["terraform-provider"],
       "matchPackageNames": ["/^hashicorp//"]
-    },
-    {
-      "description": "goss bumps invalidate the goss_sha256sum sidecar in the same file; require human review.",
-      "matchDatasources": ["github-releases"],
-      "matchPackageNames": ["goss-org/goss"],
-      "dependencyDashboardApproval": true
     }
   ],
   "customManagers": [
@@ -89,13 +83,6 @@
       "matchStrings": ["npm install -g yarn@(?<currentValue>[0-9.]+)"],
       "datasourceTemplate": "npm",
       "depNameTemplate": "yarn"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": ["/ansible/roles/goss/vars/main\\.yml$/"],
-      "matchStrings": ["goss_version:\\s*(?<currentValue>v[\\d.]+)"],
-      "datasourceTemplate": "github-releases",
-      "depNameTemplate": "goss-org/goss"
     }
   ]
 }
