@@ -61,14 +61,6 @@
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "orhun/git-cliff",
       "extractVersionTemplate": "^v?(?<version>.+)$"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": ["/(^|/)Dockerfile$/"],
-      "matchStrings": ["ARG BUN_VERSION=(?<currentValue>\\S+)"],
-      "datasourceTemplate": "github-releases",
-      "depNameTemplate": "oven-sh/bun",
-      "extractVersionTemplate": "^bun-v?(?<version>.+)$"
     }
   ]
 }
