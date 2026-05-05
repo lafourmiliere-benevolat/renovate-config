@@ -65,24 +65,10 @@
     {
       "customType": "regex",
       "managerFilePatterns": ["/(^|/)Dockerfile$/"],
-      "matchStrings": ["ARG NODE_VERSION=(?<currentValue>\\S+)"],
-      "datasourceTemplate": "node-version",
-      "depNameTemplate": "node"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": ["/(^|/)Dockerfile$/"],
       "matchStrings": ["ARG BUN_VERSION=(?<currentValue>\\S+)"],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "oven-sh/bun",
       "extractVersionTemplate": "^bun-v?(?<version>.+)$"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": ["/(^|/)Dockerfile$/"],
-      "matchStrings": ["npm install -g yarn@(?<currentValue>[0-9.]+)"],
-      "datasourceTemplate": "npm",
-      "depNameTemplate": "yarn"
     }
   ]
 }
