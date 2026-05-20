@@ -26,6 +26,19 @@
       "groupName": "hashicorp terraform providers",
       "matchDatasources": ["terraform-provider"],
       "matchPackageNames": ["/^hashicorp//"]
+    },
+    {
+      "groupName": "bun",
+      "matchDatasources": ["npm", "github-releases", "docker"],
+      "matchPackageNames": ["bun", "oven-sh/bun", "/(^|/)oven/bun$/"]
+    },
+    {
+      "groupName": "ruby",
+      "matchDatasources": ["ruby-version"]
+    },
+    {
+      "groupName": "vite-plus",
+      "matchPackageNames": ["voidzero-dev/vite-plus", "vite-plus"]
     }
   ],
   "customManagers": [
@@ -55,6 +68,14 @@
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "orhun/git-cliff",
       "extractVersionTemplate": "^v?(?<version>.+)$"
+    },
+    {
+      "customType": "regex",
+      "description": "bun via package.json `packageManager` field (Renovate's npm manager skips bun here — verified against renovate main 2026-05-20)",
+      "managerFilePatterns": ["/(^|/)package\\.json$/"],
+      "matchStrings": ["\"packageManager\"\\s*:\\s*\"bun@(?<currentValue>[^\"]+)\""],
+      "datasourceTemplate": "npm",
+      "depNameTemplate": "bun"
     }
   ]
 }
