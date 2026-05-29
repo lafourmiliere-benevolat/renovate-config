@@ -14,7 +14,6 @@
   "pre-commit": {
     "enabled": true
   },
-  "rebaseWhen": "conflicted",
   "packageRules": [
     {
       "description": "OpenTofu/Terraform version is governed by .tool-versions; do not bump required_version blocks independently.",
