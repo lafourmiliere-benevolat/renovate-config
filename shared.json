@@ -36,8 +36,9 @@
       "matchDatasources": ["ruby-version"]
     },
     {
+      "description": "Keep the whole Vite+ toolchain version in one PR: the `vp` pin in .tool-versions (github-releases voidzero-dev/vite-plus), the `vite-plus` npm devDep, and the `@voidzero-dev/vite-plus-core` package aliased by the `overrides.vite` entry. These are the same version expressed three ways; bumping them in separate PRs makes the standalone-vite/core Plugin types diverge (vp check TS2321/TS2769) and mismatches rolldown's native binding.",
       "groupName": "vite-plus",
-      "matchPackageNames": ["voidzero-dev/vite-plus", "vite-plus"]
+      "matchPackageNames": ["voidzero-dev/vite-plus", "vite-plus", "@voidzero-dev/vite-plus-core"]
     }
   ],
   "customManagers": [
