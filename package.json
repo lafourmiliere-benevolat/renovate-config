@@ -2,9 +2,9 @@
   "name": "@lafourmiliere-benevolat/renovate-config",
   "version": "0.0.1",
   "scripts": {
-    "test": "renovate-config-validator"
+    "test": "renovate-config-validator --strict default.json shared.json"
   },
-  "dependencies": {
-    "renovate": "^43.252.1"
+  "devDependencies": {
+    "renovate": "44.41.0"
   }
 }

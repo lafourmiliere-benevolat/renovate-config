@@ -16,6 +16,11 @@
   },
   "packageRules": [
     {
+      "description": "Let a release sit before we propose it. config:best-practices only applies a cooldown to npm (security:minimumReleaseAgeNpm), and most of what we track is terraform providers, GitHub Action digests and .tool-versions releases. Security updates bypass this, and anything urgent can be forced from the Dependency Dashboard.",
+      "matchDatasources": ["*"],
+      "minimumReleaseAge": "3 days"
+    },
+    {
       "description": "OpenTofu/Terraform version is governed by .tool-versions; do not bump required_version blocks independently.",
       "matchManagers": ["terraform"],
       "matchDepTypes": ["required_version"],
