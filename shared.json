@@ -7,7 +7,7 @@
     ":enableVulnerabilityAlertsWithLabel(security)"
   ],
   "timezone": "Europe/Paris",
-  "description": "Renovate opens and updates PRs only on Monday mornings: every PR update re-runs CI, and the org has 3,000 Actions minutes a month. Security updates are not scheduled.",
+  "description": "Renovate opens and updates PRs only on Monday mornings: every PR update re-runs CI, and the org has 3,000 Actions minutes a month. Security updates are not scheduled. When merging one Renovate PR leaves another behind master, tick its rebase checkbox: manual rebases ignore the schedule.",
   "schedule": ["* 0-5 * * 1"],
   "updateNotScheduled": false,
   "labels": [
