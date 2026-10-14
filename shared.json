@@ -7,6 +7,13 @@
     ":enableVulnerabilityAlertsWithLabel(security)"
   ],
   "timezone": "Europe/Paris",
+  "description": "Renovate opens and updates PRs only on Monday mornings: every PR update re-runs CI, and the org has 3,000 Actions minutes a month. Security updates are not scheduled. When merging one Renovate PR leaves another behind master, tick its rebase checkbox: manual rebases ignore the schedule.",
+  "schedule": ["* 0-5 * * 1"],
+  "updateNotScheduled": false,
+  "lockFileMaintenance": {
+    "description": "Monthly, not config:best-practices' weekly: each refresh is its own PR and CI run. Security updates still open immediately.",
+    "schedule": ["before 6am on the first day of the month"]
+  },
   "labels": [
     "dependencies",
     "renovate"
@@ -15,6 +22,12 @@
     "enabled": true
   },
   "packageRules": [
+    {
+      "description": "Put digest updates (pinned GitHub Actions and Docker images, from config:best-practices) in the weekly non-major PR instead of one PR each. First in the list, so the named groups below still claim their own digests.",
+      "matchUpdateTypes": ["digest", "pinDigest"],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch"
+    },
     {
       "description": "Let a release sit before we propose it. config:best-practices only applies a cooldown to npm (security:minimumReleaseAgeNpm), and most of what we track is terraform providers, GitHub Action digests and .tool-versions releases. Security updates bypass this, and anything urgent can be forced from the Dependency Dashboard.",
       "matchDatasources": ["*"],
