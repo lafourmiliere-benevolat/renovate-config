@@ -7,6 +7,9 @@
     ":enableVulnerabilityAlertsWithLabel(security)"
   ],
   "timezone": "Europe/Paris",
+  "description": "Renovate opens and updates PRs only on Monday mornings: every PR update re-runs CI, and the org has 3,000 Actions minutes a month. Security updates are not scheduled.",
+  "schedule": ["* 0-5 * * 1"],
+  "updateNotScheduled": false,
   "labels": [
     "dependencies",
     "renovate"
