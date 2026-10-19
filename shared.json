@@ -64,7 +64,7 @@
       "customType": "regex",
       "description": "prek (no asdf plugin upstream)",
       "managerFilePatterns": ["/(^|/)\\.tool-versions$/"],
-      "matchStrings": ["prek (?<currentValue>\\S+)"],
+      "matchStrings": ["(?m)^prek (?<currentValue>\\S+)$"],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "j178/prek",
       "extractVersionTemplate": "^v?(?<version>.+)$"
@@ -73,7 +73,7 @@
       "customType": "regex",
       "description": "vite-plus (no asdf plugin upstream)",
       "managerFilePatterns": ["/(^|/)\\.tool-versions$/"],
-      "matchStrings": ["vp (?<currentValue>\\S+)"],
+      "matchStrings": ["(?m)^vp (?<currentValue>\\S+)$"],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "voidzero-dev/vite-plus",
       "extractVersionTemplate": "^v?(?<version>.+)$"
@@ -82,7 +82,7 @@
       "customType": "regex",
       "description": "git-cliff (no asdf plugin upstream)",
       "managerFilePatterns": ["/(^|/)\\.tool-versions$/"],
-      "matchStrings": ["git-cliff (?<currentValue>\\S+)"],
+      "matchStrings": ["(?m)^git-cliff (?<currentValue>\\S+)$"],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "orhun/git-cliff",
       "extractVersionTemplate": "^v?(?<version>.+)$"
